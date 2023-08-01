@@ -19,6 +19,7 @@ async function main() {
       },
     });
 
+    console.log('process.env.EMAIL_USER ---- ,' + process.env.EMAIL_USER)
     const message = {
       from: process.env.EMAIL_USER,
       to: process.env.RECIPIENT,
