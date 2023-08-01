@@ -49,12 +49,11 @@ jobs:
         run: npm install
         working-directory: ./email-sender
 
-      - name: Renomear o artefato
-        run: mv performance-inteligente.html /github/workspace/email-sender/performance-inteligente.html
+      - name: Mover o artefato
+        run: mv performance-inteligente.html /tmp/performance-inteligente.html
 
       - name: Send email with the report
         env:
-          ARTIFACT_PATH: /github/workspace/email-sender/performance-inteligente.html
+          ARTIFACT_PATH: /tmp/performance-inteligente.html
         run: |
           node /github/workspace/email-sender/send-email.js $ARTIFACT_PATH
-
