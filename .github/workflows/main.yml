@@ -22,8 +22,8 @@ jobs:
       - name: Upload html report for job 1
         uses: actions/upload-artifact@v2
         with:
-          name: summary
-          path: summary.html
+          name: performance
+          path: performance-inteligente.html
           retention-days: 2
     
   
