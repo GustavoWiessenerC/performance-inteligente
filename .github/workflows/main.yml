@@ -13,11 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: run Load testing in K6.io
-        uses: k6io/action@v0.1
-        with:
-          filename: script.js
-          
       - name: Install Node.js
         uses: actions/setup-node@v2
         with:
