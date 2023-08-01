@@ -7,23 +7,39 @@ on:
     branches: [ master ]
 
 jobs:
-  job_1:
+  load-testing:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
-   
+
       - name: run Load testing in K6.io
         uses: k6io/action@v0.1
         with:
           filename: script.js
+          
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          
+      - name: Install email sender dependencies
+        run: npm install
+        working-directory: ./email-sender
       
-     
+      - name: Generate HTML report
+        run: k6 run --out html=performance-inteligente.html script.js
+          
       - name: Upload html report for job 1
         uses: actions/upload-artifact@v2
         with:
           name: performance
           path: performance-inteligente.html
           retention-days: 2
-    
-  
+
+      - name: Send email with the report
+        env:
+          ARTIFACT_PATH: performance-inteligente.html
+        run: |
+          node send-email.js ${{ env.ARTIFACT_PATH }}
+        working-directory: ./email-sender

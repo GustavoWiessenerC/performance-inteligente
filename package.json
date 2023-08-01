@@ -1,0 +1,25 @@
+{
+  "name": "performance-inteli",
+  "version": "1.0.0",
+  "description": "Projeto de Inteligência em performance utilizando k6.io",
+  "main": "script.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustavoWiessenerC/performance-inteligente.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GustavoWiessenerC/performance-inteligente/issues"
+  },
+  "homepage": "https://github.com/GustavoWiessenerC/performance-inteligente#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "nodemailer": "^6.9.4"
+  }
+}
