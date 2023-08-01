@@ -38,7 +38,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: performance
-          path: performance-inteligente.html
+          path: .
 
       - name: Install Node.js
         uses: actions/setup-node@v2
@@ -49,10 +49,12 @@ jobs:
         run: npm install
         working-directory: ./email-sender
 
+      - name: Renomear o artefato
+        run: mv performance-inteligente.html /github/workspace/email-sender/performance-inteligente.html
+
       - name: Send email with the report
         env:
-          ARTIFACT_PATH: performance-inteligente.html
+          ARTIFACT_PATH: /github/workspace/email-sender/performance-inteligente.html
         run: |
-          node send-email.js ${{ env.ARTIFACT_PATH }}
-        working-directory: ./email-sender
-        
+          node /github/workspace/email-sender/send-email.js $ARTIFACT_PATH
+
