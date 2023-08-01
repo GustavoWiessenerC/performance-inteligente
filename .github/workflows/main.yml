@@ -34,6 +34,9 @@ jobs:
       - name: Checkout do código-fonte
         uses: actions/checkout@v2
 
+      - name: Exibir conteúdo da pasta
+        run: ls -la
+
       - name: Baixar o artefato
         uses: actions/download-artifact@v2
         with:
@@ -49,11 +52,15 @@ jobs:
         run: npm install
         working-directory: ./email-sender
 
-      - name: Mover o artefato
-        run: mv performance-inteligente.html /tmp/performance-inteligente.html
+      - name: Copiar o artefato para a pasta de envio de e-mail
+        run: cp performance-inteligente.html ./email-sender
+
+      - name: Exibir conteúdo da pasta email-sender
+        run: ls -la email-sender/
 
       - name: Send email with the report
         env:
-          ARTIFACT_PATH: /tmp/performance-inteligente.html
+          ARTIFACT_PATH: ./email-sender/performance-inteligente.html
         run: |
-          node /github/workspace/email-sender/send-email.js $ARTIFACT_PATH
+          node ./email-sender/send-email.js ${{ env.ARTIFACT_PATH }}
+     
