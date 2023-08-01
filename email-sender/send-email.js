@@ -17,11 +17,6 @@ async function main() {
         user: process.env.EMAIL_USER,
         pass: process.env.KEY_GENERATE,
       },
-
-      tls: {
-        rejectUnauthorized: false,
-      },
-      socketTimeout: 60000, 
     });
 
     const message = {
