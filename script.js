@@ -18,6 +18,6 @@ export default function () {
 
 export function handleSummary(data) {
   return {
-    "performance-inteligente.html": htmlReport(data)
+    "summary.html": htmlReport(data)
   };
 }
