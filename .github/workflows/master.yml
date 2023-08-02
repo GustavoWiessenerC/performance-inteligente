@@ -2,15 +2,14 @@ name: CI/CD
 
 on:
   schedule:
-  - cron: '00 05 * * *'
+    - cron: '00 05 * * *'
 
 jobs:
   load-testing:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código-fonte
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: Gerenciando os testes de carga com base no script pré definido
         uses: k6io/action@v0.1
@@ -28,7 +27,6 @@ jobs:
   send_email:
     needs: load-testing
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout do código-fonte
         uses: actions/checkout@v2
@@ -57,14 +55,11 @@ jobs:
       - name: Exibir conteúdo da pasta email-sender
         run: ls -la email-sender/
 
-      - name: Enviando o email com o report 
+      - name: Enviando o email com o report
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           KEY_GENERATE: ${{ secrets.KEY_GENERATE }}
-          RECIPIENT: ${{ secrets.RECIPIENT }} 
+          RECIPIENT: ${{ secrets.RECIPIENT }}
           ARTIFACT_PATH: ./email-sender/performance-inteligente.html
         run: |
           node ./email-sender/send-email.js ${{ env.ARTIFACT_PATH }}
-  
-          
-

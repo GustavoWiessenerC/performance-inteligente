@@ -1,5 +1,6 @@
 import { check } from 'k6';
 import http from 'k6/http';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 
 export let options = {
   vus: 10,
@@ -13,4 +14,10 @@ export default function () {
     'body contains text match': (r) => r.body.includes('Collection of simple web-pages suitable for load testing.'),
   });
   
+}
+
+export function handleSummary(data) {
+  return {
+    "performance-inteligente.html": htmlReport(data)
+  };
 }
