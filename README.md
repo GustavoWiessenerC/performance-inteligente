@@ -32,7 +32,7 @@ O e-mail é enviado para o destinatário específico definido na variável de am
 
 ![](report-1.PNG)
 ![](report-2.png)
-![](report-3.png) 
+![](report-3.PNG) 
 
  ##
  ### Configuração:
