@@ -7,18 +7,18 @@ on:
     branches: [ master ]
 
 jobs:
-  job_1:
+  load-testing:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
 
-      - name: run Load testing in K6.io
+      - name: Gerenciando os testes de carga com base no script pré definido
         uses: k6io/action@v0.1
         with:
           filename: script.js
 
-      - name: Upload html report for job 1
+      - name: Upload html report para o trabalho inicial
         id: upload_report
         uses: actions/upload-artifact@v2
         with:
@@ -27,7 +27,7 @@ jobs:
           retention-days: 2
 
   send_email:
-    needs: job_1
+    needs: load-testing
     runs-on: ubuntu-latest
 
     steps:
@@ -58,7 +58,7 @@ jobs:
       - name: Exibir conteúdo da pasta email-sender
         run: ls -la email-sender/
 
-      - name: Send email with the report
+      - name: Enviando o email com o report 
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           KEY_GENERATE: ${{ secrets.KEY_GENERATE }}
