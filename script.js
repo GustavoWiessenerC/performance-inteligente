@@ -4,7 +4,7 @@ import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporte
 
 export let options = {
   vus: 10,
-  duration: '10s'
+  duration: '20s'
 };
 
 export default function () {
@@ -18,6 +18,6 @@ export default function () {
 
 export function handleSummary(data) {
   return {
-    "performance-inteligente.html": htmlReport(data)
+    "summary.html": htmlReport(data)
   };
 }
