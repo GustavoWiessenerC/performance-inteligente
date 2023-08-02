@@ -3,7 +3,6 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 const reportTemplete = require('./templete');
 
-
 async function main() {
   try {
     dotenv.config();
