@@ -1,0 +1,66 @@
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  load-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código-fonte
+        uses: actions/checkout@v1
+
+      - name: Gerenciando os testes de carga com base no script pré definido
+        uses: k6io/action@v0.1
+        with:
+          filename: script.js
+
+      - name: Upload html report para o trabalho inicial
+        id: upload_report
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance
+          path: performance-inteligente.html
+          retention-days: 2
+
+  send_email:
+    needs: load-testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código-fonte
+        uses: actions/checkout@v2
+
+      - name: Exibir conteúdo da pasta
+        run: ls -la
+
+      - name: Baixar o artefato
+        uses: actions/download-artifact@v2
+        with:
+          name: performance
+          path: .
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Instação dependencias package
+        run: npm install
+        working-directory: ./email-sender
+
+      - name: Copiar o artefato para a pasta de envio de e-mail
+        run: cp performance-inteligente.html ./email-sender
+
+      - name: Exibir conteúdo da pasta email-sender
+        run: ls -la email-sender/
+
+      - name: Enviando o email com o report
+        env:
+          EMAIL_USER: ${{ secrets.EMAIL_USER }}
+          KEY_GENERATE: ${{ secrets.KEY_GENERATE }}
+          RECIPIENT: ${{ secrets.RECIPIENT }}
+          ARTIFACT_PATH: ./email-sender/performance-inteligente.html
+        run: |
+          node ./email-sender/send-email.js ${{ env.ARTIFACT_PATH }}
