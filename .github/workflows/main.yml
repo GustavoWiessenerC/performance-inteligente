@@ -62,7 +62,7 @@ jobs:
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           KEY_GENERATE: ${{ secrets.KEY_GENERATE }}
-          RECIPIENT: 'recipient@example.com' # Substitua pelo endereço de e-mail do destinatário
+          RECIPIENT: ${{ secrets.RECIPIENT }} 
           ARTIFACT_PATH: ./email-sender/performance-inteligente.html
         run: |
           node ./email-sender/send-email.js ${{ env.ARTIFACT_PATH }}
