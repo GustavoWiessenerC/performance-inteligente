@@ -31,7 +31,7 @@ Os testes de carga de performance são realizados utilizando a ferramenta K6.io.
 O e-mail é enviado para o destinatário específico definido na variável de ambiente <b>RECIPIENT</b>.
 
 ![](report-1.PNG)
-![](report-2.png)
+![](report-2.PNG)
 ![](report-3.PNG) 
 
  ##
