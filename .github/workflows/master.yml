@@ -8,21 +8,19 @@ jobs:
   load-testing:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout do código-fonte
+      - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Gerenciando os testes de carga com base no script pré definido
-        uses: k6io/action@v0.1
+      - name: Run local k6 test
+        uses: grafana/k6-action@v0.2.0
         with:
-          filename: script.js
+          filename: ./script.js
 
-      - name: Upload html report para o trabalho inicial
-        id: upload_report
-        uses: actions/upload-artifact@v2
+      - name: Store performance test results
+        uses: actions/upload-artifact@v3
         with:
-          name: performance
-          path: performance-inteligente.html
-          retention-days: 2
+          name: k6-summary-report
+          path: summary.html
 
   send_email:
     needs: load-testing
@@ -37,7 +35,7 @@ jobs:
       - name: Baixar o artefato
         uses: actions/download-artifact@v2
         with:
-          name: performance
+          name: k6-summary-report
           path: .
 
       - name: Setup Node.js
@@ -50,7 +48,7 @@ jobs:
         working-directory: ./email-sender
 
       - name: Copiar o artefato para a pasta de envio de e-mail
-        run: cp performance-inteligente.html ./email-sender
+        run: cp summary.html ./email-sender
 
       - name: Exibir conteúdo da pasta email-sender
         run: ls -la email-sender/
@@ -60,6 +58,6 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           KEY_GENERATE: ${{ secrets.KEY_GENERATE }}
           RECIPIENT: ${{ secrets.RECIPIENT }}
-          ARTIFACT_PATH: ./email-sender/performance-inteligente.html
+          ARTIFACT_PATH: ./email-sender/summary.html
         run: |
           node ./email-sender/send-email.js ${{ env.ARTIFACT_PATH }}
