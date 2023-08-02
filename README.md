@@ -33,7 +33,7 @@ O e-mail é enviado para o destinatário específico definido na variável de am
  <details>
  <summary>Exemplo de Relatório de Testes de Performance</summary>
   
-  <iframe src="performance-inteligente.html" frameborder="0" width="100%" height="300"></iframe>
+  Veja o relatório completo [aqui](performance-inteligente.html).
 
  </details> 
 
