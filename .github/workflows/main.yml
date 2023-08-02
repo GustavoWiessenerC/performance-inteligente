@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   schedule:
-    - cron: '35 21 * * *'
+    - cron: '39 21 * * *'
 
 jobs:
   load-testing:
