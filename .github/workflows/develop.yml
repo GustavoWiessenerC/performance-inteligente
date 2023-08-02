@@ -21,7 +21,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: k6-summary-report
-          path: ./summary.html
+          path: summary.html
 
   send_email:
     needs: load-testing
@@ -36,7 +36,7 @@ jobs:
       - name: Baixar o artefato
         uses: actions/download-artifact@v2
         with:
-          name: summary
+          name: k6-summary-report
           path: .
 
       - name: Setup Node.js
