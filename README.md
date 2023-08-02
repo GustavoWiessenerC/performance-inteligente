@@ -30,12 +30,9 @@ Os testes de carga de performance são realizados utilizando a ferramenta K6.io.
 
 O e-mail é enviado para o destinatário específico definido na variável de ambiente <b>RECIPIENT</b>.
 
- <details>
- <summary>Exemplo de Relatório de Testes de Performance</summary>
-  
-  Veja o relatório completo [aqui](performance-inteligente.html).
-
- </details> 
+![](report-1.PNG)
+![](report-2.png)
+![](report-3.png) 
 
  ##
  ### Configuração:
