@@ -9,7 +9,7 @@ jobs:
   load-testing:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Version
         uses: actions/checkout@v1
 
       - name: Run local k6 test
