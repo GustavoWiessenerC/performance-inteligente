@@ -47,6 +47,7 @@ async function login(page) {
   await inputPassword.type('b_io01uya');
   const loginButton = await page.locator('.mat-button-wrapper');
   await loginButton.click();
+  sleep(2);
   const imgWithSrc = await page.locator('#home__tools-nav > a:nth-child(1) > span');
   await imgWithSrc.click();
   sleep(2);
@@ -59,8 +60,10 @@ async function login(page) {
 async function navigateToInspectionPage(page) {
   const fieldStageFilter = await page.locator('#mat-select-value-1 > span');
   await fieldStageFilter.click();
+  sleep(1);
   const valueFilterDisponivelSemImagens = await page.locator('#mat-option-0 > span');
   await valueFilterDisponivelSemImagens.click();
+  sleep(1);
   const clickBody = await page.locator('body');
   await clickBody.click();
   sleep(2);
@@ -87,6 +90,7 @@ async function findRandomOperation(page) {
 
   const buttonFindOperations = await page.locator('body > app-root > main > section > app-remotely-inspection > app-list > div.title-header > div > form > div > div:nth-child(3) > div > div > div > button:nth-child(1) > span.mat-button-wrapper');
   await buttonFindOperations.click();
+  sleep(1);
 
   return primeiroIdentificador;
 }
@@ -95,10 +99,10 @@ async function validateGraphVisibility(page) {
   sleep(3)
   const col11 = await page.locator('.col-11');
   await col11.click();
-
+  sleep(1);
   const graph = await page.locator('.graph');
   await graph.click();
-
+  sleep(1);
   const chartjs = await page.locator('.chartjs-render-monitor');
 
   check(chartjs.isVisible(), {
@@ -111,12 +115,13 @@ async function validateGraphVisibility(page) {
 async function changeAnalysisPeriod(page) {
   const button = await page.locator('body > app-root > main > section > app-remotely-inspection > app-area-confirmation > app-layout > app-footer-glebes-data > footer > app-mosaics-expansion-panel > div > div.expansion-panel__content.content.timeline.open > div > app-mosaic-timeline > div > div > div.col-5 > div > div > button');
   await button.click();
-
+  sleep(1);
   const successButton = await page.locator('button[class=success]');
   await successButton.click();
 }
 
 async function closeGraph(page) {
+  sleep(1);
   const graph = await page.locator('.graph');
   await graph.click();
 }
@@ -131,6 +136,7 @@ async function updateGraph(page) {
 
 async function validateBiomassGraphVisibility(page) {
   const biomassOperationGraph = await page.locator('.operation-data-analysis__content__biomass-graphic > img');
+  sleep(1);
   check(await biomassOperationGraph.isVisible(), {
     'Elemento grapfico biomassa está visível': (v) => v === true,
   });
