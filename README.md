@@ -24,6 +24,30 @@ O agendamento da execução do fluxo de trabalho é definido na seção on do ar
 Os testes de carga de performance são realizados utilizando a ferramenta K6.io. O script de teste é definido no arquivo script.js. O resultado dos testes é gerado em formato de relatório HTML.
 
 ##
+### Configuração de Opções (`options`):
+
+### `stages`: Define diferentes fases do teste de carga.
+- **`{ target: 500, duration: "3m" }`**: Aumenta o número de usuários virtuais (VUs) para 500 ao longo de 3 minutos.
+- **`{ target: 200, duration: "2m" }`**: Diminui o número de VUs para 200 em um período de 2 minutos.
+- **`{ target: 0, duration: "1m" }`**: Reduz o número de VUs para 0 ao longo de 1 minuto, simulando o término da carga.
+
+### `thresholds`: Estabelece critérios de sucesso para o teste.
+
+- **`http_req_failed: ['rate<0.01']`**: A taxa de falhas das requisições HTTP deve ser inferior a 1%. Isso significa que, durante o teste, menos de 1% das requisições devem falhar para que o teste seja considerado bem-sucedido.
+- **`http_req_duration: ['p(95)<2000']`**: 95% das requisições HTTP devem ter um tempo de resposta inferior a 2000 milissegundos (2 segundos). Isso garante que a maioria das requisições sejam atendidas rapidamente, dentro do limite de 2 segundos.
+
+### Função Principal (`default function`):
+- Faz uma requisição HTTP GET para `http://test.k6.io/`.
+  
+### `check`: Realiza validações na resposta da requisição.
+- **`'is status 200'`**: Verifica se o status da resposta é 200 (OK).
+- **`'body contains text match'`**: Verifica se o corpo da resposta contém o texto "Collection of simple web-pages suitable for load testing."
+- **`'response time is less than 2 seconds'`**: Verifica se o tempo de resposta é menor que 2000 milissegundos (2 segundos), como um double check.
+
+### Função de Resumo (`handleSummary`):
+- Gera um resumo dos resultados do teste em um arquivo HTML chamado `summary.html` usando o pacote `k6-reporter`. Isso facilita a visualização dos resultados do teste de carga.
+
+##
 ### Envio do Relatório por E-mail
  
  Após a execução dos testes e a geração do relatório, o fluxo de trabalho copia o relatório para a pasta de envio de e-mail e utiliza a biblioteca Nodemailer para enviar o relatório por e-mail. As credenciais de e-mail e outras informações sensíveis são configuradas como variáveis de ambiente secretas no GitHub para garantir a segurança.
