@@ -8,15 +8,18 @@ on:
 jobs:
   load-testing:
     runs-on: ubuntu-latest
+    env:
+      K6_BROWSER_ENABLED: true  
     steps:
-      - name: Checkout
+      - name: Checkout Version
         uses: actions/checkout@v1
 
       - name: Run local k6 test
-        uses: grafana/k6-action@v0.2.0
+        uses: ./
         with:
-          filename: ./script.js
-
+          browser: true
+          include: ./script.js
+  
       - name: Store performance test results
         uses: actions/upload-artifact@v3
         with:
