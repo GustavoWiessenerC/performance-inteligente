@@ -3,6 +3,11 @@ Projeto de Inteligência em performance utilizando k6.io e Node.js.
 
 ##
 ### Overview Solução:
+
+Para o primeiro diagrama, segue o fluxo da branch master com job agendando em horário especifico.
+Para o segundo diagrama, segue o mesmo padrão, com configuração de push na branch de develop para disparar o processo em ambiente de CI.
+
+
 ![](overview-solucao.jpg)
 
 ##
