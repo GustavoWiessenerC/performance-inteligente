@@ -76,3 +76,43 @@ Certifique-se de que a biblioteca Nodemailer está configurada corretamente e qu
 Ajuste o horário da cron job no arquivo .github/workflows/main.yml para que o fluxo de trabalho seja agendado para o horário desejado em UTC.
 
 Com esses passos, o fluxo de trabalho será agendado para executar os testes de performance, gerar o relatório e enviar as métricas por e-mail diariamente de acordo com o horário configurado.
+
+## Análise de Teste de Carga:
+
+### Resumo do Teste
+Este teste de carga foi realizado para avaliar a estabilidade e desempenho do serviço com um alto volume de requisições. Os resultados demonstraram alta confiabilidade e tempos de resposta rápidos, com todas as métricas dentro dos parâmetros esperados.
+
+### Estatísticas Gerais
+- **Total de Requisições**: 1.306.180
+- **Requisições com Falha**: 0
+- **Quebras de Limites e Falhas de Verificação**: 0
+
+### Métricas de Requisições HTTP
+| Métrica                  | Média   | Máximo   | Mínimo | Percentil 90 | Percentil 95 |
+|--------------------------|---------|----------|--------|--------------|--------------|
+| **Duração da Requisição (`http_req_duration`)** | 70,48 ms | 1082,88 ms | 51,95 ms | 81,23 ms     | 112,28 ms    |
+| **Duração de Espera (`http_req_waiting`)**     | 70,23 ms | 1080,08 ms | 51,91 ms | 80,64 ms     | 111,19 ms    |
+| **Conexão (`http_req_connecting`)**            | 0,37 ms  | 196,46 ms  | -      | -            | -            |
+| **TLS Handshake (`http_req_tls_handshaking`)** | 0,36 ms  | 188,79 ms  | -      | -            | -            |
+| **Envio (`http_req_sending`)**                 | 0,03 ms  | 79,92 ms   | 0,00 ms | 0,02 ms      | 0,05 ms      |
+| **Recebimento (`http_req_receiving`)**         | 0,22 ms  | 277,09 ms  | 0,01 ms | 0,09 ms      | 0,17 ms      |
+| **Bloqueio (`http_req_blocked`)**              | 0,73 ms  | 292,83 ms  | 0,00 ms | 0,00 ms      | 0,00 ms      |
+
+### Duração das Iterações
+- **Duração Média da Iteração (`iteration_duration`)**: 142,58 ms
+  - **Percentil 90**: 186,19 ms
+  - **Percentil 95**: 223,56 ms
+
+### Verificações de Resposta
+| Verificação                             | Passes  | Falhas |
+|-----------------------------------------|---------|--------|
+| **Status 200**                          | 653.090 | 0      |
+| **Corpo contém correspondência de texto** | 653.090 | 0      |
+| **Tempo de resposta inferior a 2 segundos** | 653.090 | 0      |
+
+### Conclusão
+O teste de carga foi bem-sucedido:
+- **Estabilidade**: Nenhuma falha nas requisições, com todas as respostas HTTP no status 200.
+- **Desempenho**: Tempos de resposta rápidos, todos os tempos médios e percentis de duração de requisição e iteração bem abaixo dos 2 segundos estabelecidos.
+- **Consistência**: Todos os limites e verificações foram atendidos, indicando que o serviço está apto para um grande volume de dados, e possue grande confiabilidade.
+
